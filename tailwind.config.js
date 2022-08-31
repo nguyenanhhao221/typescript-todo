@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         backgroundBlue: '#1fb6ff',
+        blueHover: '#388ae2',
       },
     },
   },
