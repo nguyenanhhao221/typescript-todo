@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AllToDo from './components/AllToDo';
 import InputField from './components/InputField';
 
 export interface ToDoList {
@@ -26,11 +27,12 @@ const App: React.FC = () => {
     return;
   };
   return (
-    <div className='App h-screen bg-backgroundBlue'>
+    <div className='App h-screen bg-backgroundBlue flex flex-col items-center gap-5'>
       <h1 className='font-Neucha text-3xl text-center text-white py-5'>
         Taskify
       </h1>
       <InputField todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
+      <AllToDo todoList={todoList} />
     </div>
   );
 };

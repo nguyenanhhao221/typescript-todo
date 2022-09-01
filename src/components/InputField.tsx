@@ -8,7 +8,7 @@ interface Props {
 
 const InputField: React.FC<Props> = ({ todo, setTodo, handleSubmit }) => {
   return (
-    <div className='input-field px-3'>
+    <div className='input-field w-full px-3'>
       <form className='relative' onSubmit={handleSubmit}>
         <input
           type='text'
@@ -22,7 +22,7 @@ const InputField: React.FC<Props> = ({ todo, setTodo, handleSubmit }) => {
         <input
           type='submit'
           value='Go'
-          className='border-solid bg-backgroundBlue w-12 h-12 m-1 right-0 text-lg  rounded-full text-white cursor-pointer absolute shadow-[0_0_10px_rgb(0,0,0)] active:scale-90 hover:bg-blueHover'
+          className='border-solid bg-backgroundBlue w-12 h-12 m-1 right-0 text-lg  rounded-full text-white cursor-pointer absolute shadow-[0_0_10px_rgb(0,0,0)] active:scale-90 hover:bg-blueHover focus:outline-none'
         />
       </form>
     </div>
