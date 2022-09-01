@@ -32,7 +32,7 @@ const App: React.FC = () => {
         Taskify
       </h1>
       <InputField todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
-      <AllToDo todoList={todoList} />
+      <AllToDo todoList={todoList} setTodoList={setTodoList} />
     </div>
   );
 };

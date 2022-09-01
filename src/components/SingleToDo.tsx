@@ -6,21 +6,37 @@ import { MdDone } from 'react-icons/md';
 type Props = {
   todo: ToDoList;
   todoList: ToDoList[];
+  setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
 };
 
-const SingleToDo: React.FC<Props> = ({ todo, todoList }) => {
+const SingleToDo: React.FC<Props> = ({ todo, todoList, setTodoList }) => {
+  //handleDone
+  //Whenever user clicked on the done button on single todo, go through the todoList array, change any todo object with id matched then changes isDone property.
+  const handleDone: (todoId: number) => void = todoId => {
+    setTodoList(
+      todoList.map(todo => {
+        return todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo;
+      })
+    );
+  };
   return (
     <form className="single-todo flex justify-between p-4 rounded-md w-full bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')]">
-      <span className='todo-text'>{todo.todo} </span>
+      {/* Check is isDone is true, if yes render the straight through, otherwise render normal span text */}
+      {todo.isDone ? (
+        <s className='todo-text'>{todo.todo}</s>
+      ) : (
+        <span className='todo-text'>{todo.todo} </span>
+      )}
+
       <div className='flex items-center gap-x-1'>
-        <span className='icon'>
+        <span className='icon cursor-pointer'>
           <AiFillEdit />
         </span>
-        <span className='icon'>
+        <span className='icon cursor-pointer'>
           <AiFillDelete />
         </span>
-        <span className='icon'>
-          <MdDone />
+        <span className='icon cursor-pointer'>
+          <MdDone onClick={() => handleDone(todo.id)} />
         </span>
       </div>
     </form>
