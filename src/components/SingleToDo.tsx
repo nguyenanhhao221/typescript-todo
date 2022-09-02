@@ -26,7 +26,8 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
     setTodoList(todoList.filter(todo => todo.id !== todoId));
   };
 
-  //Set up text in todo to display based on isDOne or Edit mode
+  //TODO: Add autofocus on the input field after clicked on the edit button
+  //*Set up text in todo to display based on isDone or Edit mode
   let todoText: JSX.Element = <span className='todo-text'>{todo.todo} </span>;
   if (todo.isDone) {
     todoText = <s className='todo-text'>{todo.todo}</s>;
@@ -38,6 +39,7 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
         id='todo-text'
         value={todo.todo}
         placeholder='Edit Todo'
+        autoFocus
         onChange={e => {
           setTodoList(
             todoList.map(eachTodo =>
