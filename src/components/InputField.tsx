@@ -1,12 +1,30 @@
-import React from 'react';
-
+import React, { useRef } from 'react';
+import { ToDoList } from '../App';
 interface Props {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmit: (e: React.FormEvent) => void;
+  todoList: ToDoList[];
+  setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
 }
 
-const InputField = ({ todo, setTodo, handleSubmit }: Props) => {
+const InputField = ({ todo, setTodo, todoList, setTodoList }: Props) => {
+  const inputEl = useRef<HTMLInputElement>(null);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (todo) {
+      setTodoList([
+        ...todoList,
+        {
+          id: Date.now(),
+          isDone: false,
+          todo: todo,
+        },
+      ]);
+      setTodo('');
+    }
+    inputEl.current?.blur(); //Shift focus away from the input field after submit
+    return;
+  };
   return (
     <div className='input-field w-full px-3'>
       <form className='relative' onSubmit={handleSubmit}>
@@ -14,6 +32,7 @@ const InputField = ({ todo, setTodo, handleSubmit }: Props) => {
           type='text'
           name='task'
           id='task'
+          ref={inputEl}
           placeholder='Enter a task'
           className='rounded-full border-none shadow-inner text-2xl py-3 px-4 w-full focus:outline-none focus:shadow-[0_0_10px_1000px_rgba(0,0,0,0.5)] '
           value={todo}
