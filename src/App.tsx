@@ -7,7 +7,7 @@ export interface ToDoList {
   todo: string;
   isDone: boolean;
 }
-const App: React.FC = () => {
+const App = () => {
   const [todo, setTodo] = useState<string>('');
   const [todoList, setTodoList] = useState<ToDoList[]>([]);
 

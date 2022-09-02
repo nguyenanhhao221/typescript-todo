@@ -7,7 +7,7 @@ type Props = {
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
 };
 
-const AllToDo: React.FC<Props> = ({ todoList, setTodoList }) => {
+const AllToDo = ({ todoList, setTodoList }: Props) => {
   return (
     <div className='AllTodo w-full px-3'>
       <ul className='flex flex-col font-Neucha'>

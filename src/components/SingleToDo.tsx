@@ -9,7 +9,7 @@ type Props = {
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
 };
 
-const SingleToDo: React.FC<Props> = ({ todo, todoList, setTodoList }) => {
+const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
   //handleDone
   //Whenever user clicked on the done button on single todo, go through the todoList array, change any todo object with id matched then changes isDone property.
   const handleDone: (todoId: number) => void = todoId => {

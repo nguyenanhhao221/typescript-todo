@@ -6,7 +6,7 @@ interface Props {
   handleSubmit: (e: React.FormEvent) => void;
 }
 
-const InputField: React.FC<Props> = ({ todo, setTodo, handleSubmit }) => {
+const InputField = ({ todo, setTodo, handleSubmit }: Props) => {
   return (
     <div className='input-field w-full px-3'>
       <form className='relative' onSubmit={handleSubmit}>
