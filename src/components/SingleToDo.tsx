@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ToDoList } from '../App';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
@@ -25,8 +25,8 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
   const handleDelete: (todoId: number) => void = todoId => {
     setTodoList(todoList.filter(todo => todo.id !== todoId));
   };
-
-  //TODO: Add autofocus on the input field after clicked on the edit button
+  //TODO: Shift focus away form the edit input field of each todo text after submit or finish editing
+  const inputEl = useRef<HTMLInputElement>(null);
   //*Set up text in todo to display based on isDone or Edit mode
   let todoText: JSX.Element = <span className='todo-text'>{todo.todo} </span>;
   if (todo.isDone) {
@@ -40,6 +40,7 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
         value={todo.todo}
         placeholder='Edit Todo'
         autoFocus
+        ref={inputEl}
         onChange={e => {
           setTodoList(
             todoList.map(eachTodo =>
@@ -57,9 +58,11 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
 
   return (
     <form
-      className="single-todo flex justify-between p-4 rounded-md w-full bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')]"
+      className="single-todo flex justify-between p-4 rounded-md w-full hover:scale-105 focus:scale-105 duration-200 bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')]"
       onSubmit={e => {
         e.preventDefault();
+        inputEl.current?.blur();
+        setEditMode(!editMode);
         return;
       }}
     >

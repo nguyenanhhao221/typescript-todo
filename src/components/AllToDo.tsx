@@ -9,7 +9,7 @@ type Props = {
 
 const AllToDo = ({ todoList, setTodoList }: Props) => {
   return (
-    <div className='AllTodo w-full px-3'>
+    <div className='AllTodo w-full px-10'>
       <ul className='flex flex-col font-Neucha'>
         {todoList.map(todo => (
           <li key={todo.id} className='py-2'>

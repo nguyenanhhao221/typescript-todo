@@ -41,7 +41,7 @@ const InputField = ({ todo, setTodo, todoList, setTodoList }: Props) => {
         <input
           type='submit'
           value='Go'
-          className='border-solid bg-backgroundBlue w-12 h-12 m-1 right-0 text-lg  rounded-full text-white cursor-pointer absolute shadow-[0_0_10px_rgb(0,0,0)] active:scale-90 hover:bg-blueHover focus:outline-none'
+          className='border-solid bg-backgroundBlue w-12 h-12 m-1 right-0 text-lg  rounded-full text-white cursor-pointer absolute shadow-[0_0_10px_rgb(0,0,0)] active:scale-90 hover:scale-90 hover:bg-blueHover focus:outline-none'
         />
       </form>
     </div>
