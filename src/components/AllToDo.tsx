@@ -11,8 +11,16 @@ type Props = {
 const AllToDo = ({ todoList, setTodoList }: Props) => {
   return (
     <div className='AllTodo w-full px-10 flex gap-4 font-Neucha '>
-      <ActiveToDo todoList={todoList} setTodoList={setTodoList} />
-      <CompleteToDo todoList={todoList} setTodoList={setTodoList} />
+      <ActiveToDo
+        activeTodo={todoList.filter(todo => todo.isDone === false)}
+        completeTodo={todoList.filter(todo => todo.isDone === true)}
+        setTodoList={setTodoList}
+      />
+      <CompleteToDo
+        completeTodo={todoList.filter(todo => todo.isDone === true)}
+        activeTodo={todoList.filter(todo => todo.isDone === false)}
+        setTodoList={setTodoList}
+      />
     </div>
   );
 };

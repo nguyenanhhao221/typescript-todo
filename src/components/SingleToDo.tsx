@@ -2,30 +2,35 @@ import React, { useRef, useState } from 'react';
 import { ToDoList } from '../App';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
-
+import { Draggable } from '@hello-pangea/dnd';
 type Props = {
   todo: ToDoList;
-  todoList: ToDoList[];
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
+  index: number;
+  activeTodo: ToDoList[];
+  completeTodo: ToDoList[];
 };
 
-const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
+const SingleToDo = ({ todo, activeTodo, setTodoList, index }: Props) => {
   const [editMode, setEditMode] = useState(false);
   //handleDone
   //Whenever user clicked on the done button on single todo, go through the todoList array, change any todo object with id matched then changes isDone property.
   const handleDone: (todoId: number) => void = todoId => {
-    setTodoList(
-      todoList.map(todo => {
-        return todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo;
-      })
-    );
+    if (activeTodo) {
+      setTodoList(
+        activeTodo.map(todo => {
+          return todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo;
+        })
+      );
+    }
   };
 
   //handleDelete
   const handleDelete: (todoId: number) => void = todoId => {
-    setTodoList(todoList.filter(todo => todo.id !== todoId));
+    if (activeTodo) {
+      setTodoList(activeTodo.filter(todo => todo.id !== todoId));
+    }
   };
-  //TODO: Shift focus away form the edit input field of each todo text after submit or finish editing
   const inputEl = useRef<HTMLInputElement>(null);
   //*Set up text in todo to display based on isDone or Edit mode
   let todoText: JSX.Element = <span className='todo-text'>{todo.todo} </span>;
@@ -43,7 +48,7 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
         ref={inputEl}
         onChange={e => {
           setTodoList(
-            todoList.map(eachTodo =>
+            activeTodo.map(eachTodo =>
               eachTodo.id === todo.id
                 ? { ...eachTodo, todo: e.target.value }
                 : eachTodo
@@ -57,29 +62,39 @@ const SingleToDo = ({ todo, todoList, setTodoList }: Props) => {
   }
 
   return (
-    <form
-      className="single-todo flex justify-between p-4 rounded-md w-full hover:scale-105 focus:scale-105 duration-200 bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')]"
-      onSubmit={e => {
-        e.preventDefault();
-        inputEl.current?.blur();
-        setEditMode(!editMode);
-        return;
-      }}
-    >
-      {todoText}
+    <Draggable draggableId={todo.id.toString()} index={index}>
+      {provided => (
+        <li
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <form
+            className="single-todo flex justify-between p-4 rounded-md w-full hover:scale-105 focus:scale-105 duration-200 bg-[url('https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg')]"
+            onSubmit={e => {
+              e.preventDefault();
+              inputEl.current?.blur();
+              setEditMode(!editMode);
+              return;
+            }}
+          >
+            {todoText}
 
-      <div className='flex items-center gap-x-1'>
-        <span className='icon cursor-pointer'>
-          <AiFillEdit onClick={() => setEditMode(!editMode)} />
-        </span>
-        <span className='icon cursor-pointer'>
-          <AiFillDelete onClick={() => handleDelete(todo.id)} />
-        </span>
-        <span className='icon cursor-pointer'>
-          <MdDone onClick={() => handleDone(todo.id)} />
-        </span>
-      </div>
-    </form>
+            <div className='flex items-center gap-x-1'>
+              <span className='icon cursor-pointer'>
+                <AiFillEdit onClick={() => setEditMode(!editMode)} />
+              </span>
+              <span className='icon cursor-pointer'>
+                <AiFillDelete onClick={() => handleDelete(todo.id)} />
+              </span>
+              <span className='icon cursor-pointer'>
+                <MdDone onClick={() => handleDone(todo.id)} />
+              </span>
+            </div>
+          </form>
+        </li>
+      )}
+    </Draggable>
   );
 };
 
