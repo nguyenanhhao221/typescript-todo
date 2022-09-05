@@ -1,6 +1,7 @@
 import React from 'react';
 import { ToDoList } from '../App';
-import SingleToDo from './SingleToDo';
+import CompleteToDo from './CompleteToDo';
+import ActiveToDo from './ActiveToDo';
 
 type Props = {
   todoList: ToDoList[];
@@ -9,18 +10,9 @@ type Props = {
 
 const AllToDo = ({ todoList, setTodoList }: Props) => {
   return (
-    <div className='AllTodo w-full px-10'>
-      <ul className='flex flex-col font-Neucha'>
-        {todoList.map(todo => (
-          <li key={todo.id} className='py-2'>
-            <SingleToDo
-              todo={todo}
-              todoList={todoList}
-              setTodoList={setTodoList}
-            />
-          </li>
-        ))}
-      </ul>
+    <div className='AllTodo w-full px-10 flex gap-4 font-Neucha '>
+      <ActiveToDo todoList={todoList} setTodoList={setTodoList} />
+      <CompleteToDo todoList={todoList} setTodoList={setTodoList} />
     </div>
   );
 };

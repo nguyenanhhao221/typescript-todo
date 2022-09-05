@@ -26,7 +26,7 @@ const InputField = ({ todo, setTodo, todoList, setTodoList }: Props) => {
     return;
   };
   return (
-    <div className='input-field w-full px-3'>
+    <div className='input-field w-full px-6'>
       <form className='relative' onSubmit={handleSubmit}>
         <input
           type='text'
