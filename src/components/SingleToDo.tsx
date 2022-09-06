@@ -7,29 +7,24 @@ type Props = {
   todo: ToDoList;
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
   index: number;
-  activeTodo: ToDoList[];
-  completeTodo: ToDoList[];
+  todoList: ToDoList[];
 };
 
-const SingleToDo = ({ todo, activeTodo, setTodoList, index }: Props) => {
+const SingleToDo = ({ todo, setTodoList, todoList, index }: Props) => {
   const [editMode, setEditMode] = useState(false);
   //handleDone
   //Whenever user clicked on the done button on single todo, go through the todoList array, change any todo object with id matched then changes isDone property.
   const handleDone: (todoId: number) => void = todoId => {
-    if (activeTodo) {
-      setTodoList(
-        activeTodo.map(todo => {
-          return todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo;
-        })
-      );
-    }
+    setTodoList(
+      todoList.map(todo => {
+        return todo.id === todoId ? { ...todo, isDone: !todo.isDone } : todo;
+      })
+    );
   };
 
   //handleDelete
   const handleDelete: (todoId: number) => void = todoId => {
-    if (activeTodo) {
-      setTodoList(activeTodo.filter(todo => todo.id !== todoId));
-    }
+    setTodoList(todoList.filter(todo => todo.id !== todoId));
   };
   const inputEl = useRef<HTMLInputElement>(null);
   //*Set up text in todo to display based on isDone or Edit mode
@@ -48,7 +43,7 @@ const SingleToDo = ({ todo, activeTodo, setTodoList, index }: Props) => {
         ref={inputEl}
         onChange={e => {
           setTodoList(
-            activeTodo.map(eachTodo =>
+            todoList.map(eachTodo =>
               eachTodo.id === todo.id
                 ? { ...eachTodo, todo: e.target.value }
                 : eachTodo

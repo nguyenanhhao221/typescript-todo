@@ -4,12 +4,12 @@ import { ToDoList } from '../App';
 import SingleToDo from './SingleToDo';
 
 type Props = {
-  activeTodo: ToDoList[];
+  todoList: ToDoList[];
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
-  completeTodo: ToDoList[];
+  activeTodo: ToDoList[];
 };
 
-function ActiveToDo({ activeTodo, setTodoList, completeTodo }: Props) {
+function ActiveToDo({ todoList, setTodoList, activeTodo }: Props) {
   return (
     <Droppable droppableId='active-todo'>
       {provided => (
@@ -20,14 +20,13 @@ function ActiveToDo({ activeTodo, setTodoList, completeTodo }: Props) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {activeTodo.map((todo, index) => (
+            {activeTodo.map((eachTodo, index) => (
               <SingleToDo
-                todo={todo}
-                activeTodo={activeTodo}
-                completeTodo={completeTodo}
-                setTodoList={setTodoList}
                 index={index}
-                key={todo.id}
+                setTodoList={setTodoList}
+                todo={eachTodo}
+                todoList={todoList}
+                key={eachTodo.id}
               />
             ))}
             {provided.placeholder}

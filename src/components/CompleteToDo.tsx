@@ -4,12 +4,12 @@ import { ToDoList } from '../App';
 import SingleToDo from './SingleToDo';
 
 type Props = {
-  completeTodo: ToDoList[];
-  activeTodo: ToDoList[];
+  todoList: ToDoList[];
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
+  completeTodo: ToDoList[];
 };
 
-function CompleteToDo({ completeTodo, activeTodo, setTodoList }: Props) {
+function CompleteToDo({ todoList, setTodoList, completeTodo }: Props) {
   return (
     <Droppable droppableId='complete-todo'>
       {provided => (
@@ -20,19 +20,15 @@ function CompleteToDo({ completeTodo, activeTodo, setTodoList }: Props) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {completeTodo
-              .filter(todo => todo.isDone === true)
-              .map((todo, index) => (
-                <li key={todo.id} className='py-2'>
-                  <SingleToDo
-                    todo={todo}
-                    completeTodo={completeTodo}
-                    activeTodo={activeTodo}
-                    setTodoList={setTodoList}
-                    index={index}
-                  />
-                </li>
-              ))}
+            {completeTodo.map((eachTodo, index) => (
+              <SingleToDo
+                index={index}
+                setTodoList={setTodoList}
+                todo={eachTodo}
+                todoList={todoList}
+                key={eachTodo.id}
+              />
+            ))}
             {provided.placeholder}
           </ul>
         </div>

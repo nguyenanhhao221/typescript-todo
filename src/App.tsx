@@ -28,7 +28,12 @@ const App = () => {
           todoList={todoList}
           setTodoList={setTodoList}
         />
-        <AllToDo todoList={todoList} setTodoList={setTodoList} />
+        <AllToDo
+          todoList={todoList}
+          setTodoList={setTodoList}
+          activeTodo={todoList.filter(eachTodo => eachTodo.isDone === false)}
+          completeTodo={todoList.filter(eachTodo => eachTodo.isDone === true)}
+        />
       </div>
     </DragDropContext>
   );

@@ -6,20 +6,27 @@ import ActiveToDo from './ActiveToDo';
 type Props = {
   todoList: ToDoList[];
   setTodoList: React.Dispatch<React.SetStateAction<ToDoList[]>>;
+  activeTodo: ToDoList[];
+  completeTodo: ToDoList[];
 };
 
-const AllToDo = ({ todoList, setTodoList }: Props) => {
+const AllToDo = ({
+  todoList,
+  setTodoList,
+  activeTodo,
+  completeTodo,
+}: Props) => {
   return (
-    <div className='AllTodo w-full px-10 flex gap-4 font-Neucha '>
+    <div className='AllTodo w-full px-10 flex items-start gap-4 font-Neucha '>
       <ActiveToDo
-        activeTodo={todoList.filter(todo => todo.isDone === false)}
-        completeTodo={todoList.filter(todo => todo.isDone === true)}
+        todoList={todoList}
         setTodoList={setTodoList}
+        activeTodo={activeTodo}
       />
       <CompleteToDo
-        completeTodo={todoList.filter(todo => todo.isDone === true)}
-        activeTodo={todoList.filter(todo => todo.isDone === false)}
         setTodoList={setTodoList}
+        todoList={todoList}
+        completeTodo={completeTodo}
       />
     </div>
   );
