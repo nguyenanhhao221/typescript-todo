@@ -16,7 +16,7 @@ function ActiveToDo({ todoList, setTodoList, activeTodo }: Props) {
         <div className='ActiveToDo w-full bg-teal-300 p-3'>
           <h2 className='text-white text-3xl'>Active</h2>
           <ul
-            className='flex flex-col space-y-2 font-Neucha'
+            className='flex flex-col font-Neucha'
             ref={provided.innerRef}
             {...provided.droppableProps}
           >

@@ -60,6 +60,7 @@ const SingleToDo = ({ todo, setTodoList, todoList, index }: Props) => {
     <Draggable draggableId={todo.id.toString()} index={index}>
       {provided => (
         <li
+          className='my-2'
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

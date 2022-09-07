@@ -20,7 +20,7 @@ function CompleteToDo({ todoList, setTodoList, completeTodo }: Props) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {completeTodo.map((eachTodo, index) => (
+            {completeTodo?.map((eachTodo, index) => (
               <SingleToDo
                 index={index}
                 setTodoList={setTodoList}
