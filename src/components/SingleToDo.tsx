@@ -58,9 +58,11 @@ const SingleToDo = ({ todo, setTodoList, todoList, index }: Props) => {
 
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
-      {provided => (
+      {(provided, snapshot) => (
         <li
-          className='my-2'
+          className={`my-2 ${
+            snapshot.isDragging ? `shadow-[0_0_20px_rgb(0,0,0)]` : ``
+          }`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

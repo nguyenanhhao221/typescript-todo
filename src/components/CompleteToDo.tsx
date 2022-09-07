@@ -12,8 +12,12 @@ type Props = {
 function CompleteToDo({ todoList, setTodoList, completeTodo }: Props) {
   return (
     <Droppable droppableId='complete-todo'>
-      {provided => (
-        <div className='CompleteToDo w-full bg-red-400 p-3'>
+      {(provided, snapshot) => (
+        <div
+          className={`CompleteToDo w-full bg-red-400 p-3 ${
+            snapshot.isDraggingOver ? `bg-[rgb(255,38,0)]` : ``
+          }`}
+        >
           <h2 className='text-white text-3xl'>Completed</h2>
           <ul
             className='flex flex-col font-Neucha'

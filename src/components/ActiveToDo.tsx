@@ -12,8 +12,12 @@ type Props = {
 function ActiveToDo({ todoList, setTodoList, activeTodo }: Props) {
   return (
     <Droppable droppableId='active-todo'>
-      {provided => (
-        <div className='ActiveToDo w-full bg-teal-300 p-3'>
+      {(provided, snapshot) => (
+        <div
+          className={`ActiveToDo w-full bg-teal-300 p-3 ${
+            snapshot.isDraggingOver ? `bg-[rgb(0,221,236)]` : ``
+          }`}
+        >
           <h2 className='text-white text-3xl'>Active</h2>
           <ul
             className='flex flex-col font-Neucha'
